@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  ip        String   @unique
+  createdAt DateTime @default(now())
+  notes     Note[] // Opposite relation for `Note.user`
+  votes     Vote[] // Opposite relation for `Vote.user`
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  content   String
+  upvotes   Int      @default(0)
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  votes     Vote[] // Opposite relation for `Vote.note`
+}
+
+model Vote {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  noteId Int
+  vote   Int // 1 for upvote, -1 for downvote
+  user   User @relation(fields: [userId], references: [id])
+  note   Note @relation(fields: [noteId], references: [id])
+
+  @@unique([userId, noteId])
+}

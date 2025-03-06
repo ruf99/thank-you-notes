@@ -1,0 +1,22 @@
+{
+  "name": "thank-you",
+  "version": "1.0.0",
+  "description": "A platform to express gratitude by writing and reading thank-you notes. Users can write notes, view others' notes, and upvote their favorites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.9",
+    "prisma": "^6.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.4.1"
+  }
+}
